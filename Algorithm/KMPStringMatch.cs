@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Algorithm
 {
     /// <summary>
-    /// KMP模式匹配算法1
+    /// KMP模式匹配算法1，LeetCode 28
     /// </summary>
     public class KMPStringMatch1 : ITest
     {
@@ -108,7 +108,7 @@ namespace Algorithm
     }
 
     /// <summary>
-    /// KMP模式匹配算法0
+    /// KMP模式匹配算法0，LeetCode 28
     /// </summary>
     public class KMPStringMatch : ITest
     {

@@ -1,3 +1,5 @@
 .vs
 Algorithm/bin/
 Algorithm/obj/
+Algorithm/Algorithm.csproj.user
+Algorithm/Program.cs
