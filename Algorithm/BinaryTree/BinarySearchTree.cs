@@ -3,10 +3,12 @@
 namespace Algorithm
 {
     /// <summary>
-    /// 有序数组转二叉搜索树,LeetCode 108
+    /// 二叉搜索树
     /// </summary>
     class BinarySearchTree : ITest
     {
+        #region 有序数组转二叉搜索树,LeetCode 108
+
         /// <summary>
         /// 根据数组构造高度平衡的二叉树
         /// </summary>
@@ -40,6 +42,60 @@ namespace Algorithm
             return node;
         }
 
+        #endregion
+
+        #region 有序单链表转二叉搜索树,LeetCode 109
+
+        /// <summary>
+        /// 有序单链表转二叉搜索树
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public TreeNode SortedListToBST(ListNode head)
+        {
+            m_currNode = head;
+            // 这里统计链表的长度
+            int length = 0;
+            while (m_currNode != null)
+            {
+                ++length;
+                m_currNode = m_currNode.next;
+            }
+            m_currNode = head;
+            return CreateBST(0, length - 1);
+        }
+
+        /// <summary>
+        /// 有序链表的顺序其实就是二叉搜索树的中序遍历顺序。
+        /// 这里使用中序遍历步骤，碰到原步骤中应当打印节点值的地方，替换为赋值即可。
+        /// 因为树还未构造，原步骤中判断子节点为null的地方，改为判断左右区间来间接判断是否没有子节点了
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public TreeNode CreateBST(int left, int right)
+        {
+            if (left > right)
+            {
+                return null;
+            }
+
+            int middle = (left + right) / 2;
+            var node = new TreeNode();
+            node.left = CreateBST(left, middle - 1);
+            node.val = m_currNode.val;
+            m_currNode = m_currNode.next;
+            node.right = CreateBST(middle + 1, right);
+            return node;
+        }
+
+        /// <summary>
+        /// 当前单链表节点
+        /// </summary>
+        private ListNode m_currNode;
+
+        #endregion
+
         public void Test()
         {
             // 可调用二叉树遍历的方法打印，还没写所以先空着
@@ -60,6 +116,20 @@ namespace Algorithm
             this.val = val;
             this.left = left;
             this.right = right;
+        }
+    }
+
+    /// <summary>
+    /// 单链表节点
+    /// </summary>
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int val = 0, ListNode next = null)
+        {
+            this.val = val;
+            this.next = next;
         }
     }
 }
